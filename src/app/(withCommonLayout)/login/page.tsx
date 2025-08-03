@@ -1,9 +1,10 @@
 "use client"
+import { Button } from "@/components/ui/button";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { verifyToken } from "@/utils/verifyToken";
-import { Button } from "antd";
+ 
 import { useForm } from "react-hook-form";
 
 const LoginPage = () => {
@@ -15,7 +16,7 @@ const LoginPage = () => {
     }
   });
   const [login, { error}] = useLoginMutation();
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: {email : string, password : string}) => {
     const userInfo = {
       email : data.email,
       password : data.password
@@ -34,7 +35,7 @@ const LoginPage = () => {
         <label htmlFor="password">Password</label>
         <input type="password" id="password" {...register("password")} />
       </div>
-     <Button htmlType="submit">Login</Button>
+     <Button type="submit">Login</Button>
     </form>
   )
 };
