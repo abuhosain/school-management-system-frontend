@@ -1,0 +1,61 @@
+
+/* Professional Marquee Animation */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-content {
+  display: flex;
+  animation: marquee 60s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee-item {
+   
+  font-size: 0.875rem;
+  
+  margin-right: 4rem;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Pause animation on hover */
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+/* Smooth fade edges for marquee */
+.marquee-container::before,
+.marquee-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 2rem;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+ 
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .marquee-content {
+    animation-duration: 45s;
+  }
+
+  .marquee-item {
+    font-size: 0.8125rem;
+    margin-right: 3rem;
+  }
+}
