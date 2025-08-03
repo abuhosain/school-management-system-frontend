@@ -1,24 +1,26 @@
 "use client"
 import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { setUser } from "@/redux/features/auth/authSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { Button } from "antd";
 import { useForm } from "react-hook-form";
 
 const LoginPage = () => {
+  const dispatch = useAppDispatch();
   const {register, handleSubmit} = useForm({
     defaultValues: {
       email : "info@sunriseschools.com",
       password : "info@sunriseschools.com"
     }
   });
-  const [login, {data, error}] = useLoginMutation();
-  console.log(data);
-  console.log(error);
-  const onSubmit = (data: any) => {
+  const [login, { error}] = useLoginMutation();
+  const onSubmit = async (data: any) => {
     const userInfo = {
       email : data.email,
       password : data.password
     }
-    login(userInfo)
+  const res =  await login(userInfo).unwrap();
+  dispatch(setUser({user : {}, token : res?.data?.accessToken}))
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
