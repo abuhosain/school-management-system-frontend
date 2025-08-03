@@ -3,7 +3,6 @@
 import { ChevronDown, Menu, GraduationCap, User } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Collapsible,
@@ -18,14 +17,51 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
+
+const navigationItems = [
+  { label: "ABOUT US", href: "/about" },
+  { label: "CONTACT", href: "/contact" },
+  { label: "PAYMENT", href: "/payment" },
+  { label: "RESULTS", href: "/result" },
+  { label: "NOTICES", href: "/notices" },
+];
+
+const academicItems = [
+  {
+    label: "Teacher Information",
+    href: "/academic/teachers",
+    description: "Faculty profiles and contact details",
+  },
+  {
+    label: "Student Information",
+    href: "/academic/students",
+    description: "Student portal and academic records",
+  },
+];
+
+const departments = [
+  { label: "Science Department", tagline: "Explore, Discover, Innovate" },
+  { label: "Humanities Department", tagline: "Understand, Reflect, Connect" },
+  { label: "Arts Department", tagline: "Create, Imagine, Perform" },
+  { label: "Commerce Department", tagline: "Learn, Lead, Succeed" },
+];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
+  const handleMobileNavClick = () => {
+    setOpen(false);
+  };
+
   return (
-    <header className="w-full bg-slate-800 text-white shadow-lg">
+    <header className="w-full bg-slate-800 text-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Mobile Menu */}
@@ -34,199 +70,90 @@ export default function Navbar() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden text-white hover:bg-slate-700"
+                className="lg:hidden text-white hover:bg-slate-700 focus:bg-slate-700"
+                aria-label="Open navigation menu"
               >
                 <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle navigation menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent
               side="left"
-              className="w-80 bg-slate-800 text-white border-slate-700"
+              className="w-80 bg-slate-800 text-white border-slate-700 p-0"
             >
-              <div className="flex items-center gap-2 mb-6">
-                <GraduationCap className="h-6 w-6" />
-                <span className="font-bold text-lg">EduPortal</span>
+              <SheetTitle className="sr-only">
+                Mobile Navigation Menu
+              </SheetTitle>
+
+              {/* Mobile Header */}
+              <div className="flex items-center justify-between p-6 border-b border-slate-700">
+                <div className="flex items-center gap-2">
+                  <GraduationCap className="h-6 w-6 text-blue-400" />
+                  <span className="font-bold text-lg">
+                    Kutubpur High School
+                  </span>
+                </div>
               </div>
-              <div className="grid gap-2">
-                <Link
-                  href="/"
-                  className="flex w-full items-center py-3 px-2 text-sm font-medium hover:bg-slate-700 rounded-md transition-colors"
-                  onClick={() => setOpen(false)}
-                >
-                  HOME
-                </Link>
 
-                <Link
-                  href="/about"
-                  className="flex w-full items-center py-3 px-2 text-sm font-medium hover:bg-slate-700 rounded-md transition-colors"
-                  onClick={() => setOpen(false)}
-                >
-                  ABOUT US
-                </Link>
+              {/* Mobile Navigation */}
+              <div className="p-6 space-y-2">
+                {navigationItems.map(({ label, href }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="block px-3 py-2 text-sm font-medium text-white hover:bg-slate-700 rounded-md transition-colors"
+                    onClick={handleMobileNavClick}
+                  >
+                    {label}
+                  </Link>
+                ))}
 
-                <Collapsible className="grid gap-2">
-                  <CollapsibleTrigger className="flex w-full items-center justify-between py-3 px-2 text-sm font-medium hover:bg-slate-700 rounded-md transition-colors [&[data-state=open]>svg]:rotate-180">
-                    ACADEMIC{" "}
-                    <ChevronDown className="h-4 w-4 transition-transform" />
+                {/* Mobile Academic Dropdown */}
+                <Collapsible className="space-y-2">
+                  <CollapsibleTrigger className="flex w-full items-center justify-between px-3 py-2 text-sm font-medium text-white hover:bg-slate-700 rounded-md transition-colors [&[data-state=open]>svg]:rotate-180">
+                    ACADEMIC
+                    <ChevronDown className="h-4 w-4 transition-transform duration-200" />
                   </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <div className="ml-4 grid gap-1">
+                  <CollapsibleContent className="space-y-1">
+                    {academicItems.map(({ label, href }) => (
                       <Link
-                        href="/academic/teachers"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
+                        key={href}
+                        href={href}
+                        className="block px-6 py-2 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
+                        onClick={handleMobileNavClick}
                       >
-                        Teacher Information
+                        {label}
                       </Link>
-                      <Link
-                        href="/academic/students"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
-                      >
-                        Student Information
-                      </Link>
-                      <Link
-                        href="/academic/routine"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
-                      >
-                        Routine
-                      </Link>
-                      <Link
-                        href="/academic/syllabus"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
-                      >
-                        Syllabus
-                      </Link>
-                      <Link
-                        href="/academic/rules"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
-                      >
-                        Rules & Regulations
-                      </Link>
-                    </div>
+                    ))}
                   </CollapsibleContent>
                 </Collapsible>
 
-                <Collapsible className="grid gap-2">
-                  <CollapsibleTrigger className="flex w-full items-center justify-between py-3 px-2 text-sm font-medium hover:bg-slate-700 rounded-md transition-colors [&[data-state=open]>svg]:rotate-180">
-                    DEPARTMENTS{" "}
-                    <ChevronDown className="h-4 w-4 transition-transform" />
+                {/* Mobile Departments Dropdown */}
+                <Collapsible className="space-y-2">
+                  <CollapsibleTrigger className="flex w-full items-center justify-between px-3 py-2 text-sm font-medium text-white hover:bg-slate-700 rounded-md transition-colors [&[data-state=open]>svg]:rotate-180">
+                    DEPARTMENTS
+                    <ChevronDown className="h-4 w-4 transition-transform duration-200" />
                   </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <div className="ml-4 grid gap-1">
+                  <CollapsibleContent className="space-y-1">
+                    {departments.map(({ label }, idx) => (
                       <Link
-                        href="/departments/cse"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
+                        key={idx}
+                        href="/department"
+                        className="block px-6 py-2 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
+                        onClick={handleMobileNavClick}
                       >
-                        Computer Science
+                        {label}
                       </Link>
-                      <Link
-                        href="/departments/eee"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
-                      >
-                        Electrical Engineering
-                      </Link>
-                      <Link
-                        href="/departments/civil"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
-                      >
-                        Civil Engineering
-                      </Link>
-                      <Link
-                        href="/departments/business"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
-                      >
-                        Business Administration
-                      </Link>
-                    </div>
+                    ))}
                   </CollapsibleContent>
                 </Collapsible>
-
-                <Link
-                  href="/notices"
-                  className="flex w-full items-center py-3 px-2 text-sm font-medium hover:bg-slate-700 rounded-md transition-colors"
-                  onClick={() => setOpen(false)}
-                >
-                  NOTICES
-                </Link>
-
-                <Collapsible className="grid gap-2">
-                  <CollapsibleTrigger className="flex w-full items-center justify-between py-3 px-2 text-sm font-medium hover:bg-slate-700 rounded-md transition-colors [&[data-state=open]>svg]:rotate-180">
-                    PAYMENT{" "}
-                    <ChevronDown className="h-4 w-4 transition-transform" />
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <div className="ml-4 grid gap-1">
-                      <Link
-                        href="/payment/tuition"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
-                      >
-                        Tuition Fees
-                      </Link>
-                      <Link
-                        href="/payment/hostel"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
-                      >
-                        Hostel Fees
-                      </Link>
-                      <Link
-                        href="/payment/library"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
-                      >
-                        Library Fees
-                      </Link>
-                      <Link
-                        href="/payment/history"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
-                      >
-                        Payment History
-                      </Link>
-                    </div>
-                  </CollapsibleContent>
-                </Collapsible>
-
-                <Collapsible className="grid gap-2">
-                  <CollapsibleTrigger className="flex w-full items-center justify-between py-3 px-2 text-sm font-medium hover:bg-slate-700 rounded-md transition-colors [&[data-state=open]>svg]:rotate-180">
-                    RESULTS{" "}
-                    <ChevronDown className="h-4 w-4 transition-transform" />
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <div className="ml-4 grid gap-1">
-                      <Link
-                        href="/results/semester"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
-                      >
-                        Semester Results
-                      </Link>
-                      <Link
-                        href="/results/final"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
-                      >
-                        Final Results
-                      </Link>
-                      <Link
-                        href="/results/transcript"
-                        className="block py-2 px-3 text-sm text-slate-300 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
-                      >
-                        Transcript
-                      </Link>
-                    </div>
-                  </CollapsibleContent>
-                </Collapsible>
-
-                <Link
-                  href="/contact"
-                  className="flex w-full items-center py-3 px-2 text-sm font-medium hover:bg-slate-700 rounded-md transition-colors"
-                  onClick={() => setOpen(false)}
-                >
-                  CONTACT
-                </Link>
 
                 <Separator className="my-4 bg-slate-600" />
 
+                {/* Mobile Login Button */}
                 <Button
                   variant="outline"
-                  className="w-full border-slate-600 text-white hover:bg-slate-700 bg-transparent"
-                  onClick={() => setOpen(false)}
+                  className="w-full border-slate-600 text-white hover:bg-slate-700 bg-transparent transition-colors"
+                  onClick={handleMobileNavClick}
                 >
                   <User className="h-4 w-4 mr-2" />
                   LOGIN
@@ -236,9 +163,14 @@ export default function Navbar() {
           </Sheet>
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <GraduationCap className="h-8 w-8" />
-            <span className="font-bold text-xl hidden sm:block">Kutubpur High School</span>
+          <Link
+            href="/"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+          >
+            <GraduationCap className="h-8 w-8 text-blue-400" />
+            <span className="font-bold text-xl hidden sm:block">
+              Kutubpur High School
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -247,312 +179,97 @@ export default function Navbar() {
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link
-                    href="/"
-                    className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700 focus:bg-slate-700 focus:outline-none"
+                    href={"/"}
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700 hover:text-white focus:bg-slate-700 focus:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                   >
-                    HOME
+                    {"HOME"}
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
 
+              {/* Academic Dropdown */}
               <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <Link
-                    href="/about"
-                    className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700 focus:bg-slate-700 focus:outline-none"
-                  >
-                    ABOUT US
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white hover:bg-slate-700 focus:bg-slate-700 data-[active]:bg-slate-700 data-[state=open]:bg-slate-700">
+                <NavigationMenuTrigger className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700 hover:text-white focus:bg-slate-700 focus:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-slate-700/50 data-[state=open]:bg-slate-700/50">
                   ACADEMIC
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="grid w-[400px] gap-3 p-4 bg-white">
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/academic/teachers"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Teacher Information
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          Faculty profiles and contact details
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/academic/students"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Student Information
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          Student portal and academic records
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/academic/routine"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Routine
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          Class schedules and timetables
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/academic/syllabus"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Syllabus
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          Course curriculum and syllabus
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/academic/rules"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Rules & Regulations
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          Academic policies and guidelines
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
+                  <div className="grid w-[400px] gap-3 p-4 bg-white shadow-lg rounded-md">
+                    {academicItems.map(({ label, href, description }) => (
+                      <NavigationMenuLink key={href} asChild>
+                        <Link
+                          href={href}
+                          className="group grid h-auto w-full items-start justify-start gap-1 rounded-md bg-white p-4 text-sm font-medium transition-colors hover:bg-slate-50 focus:bg-slate-50 focus:outline-none"
+                        >
+                          <div className="text-sm font-medium text-slate-900 group-hover:text-slate-800">
+                            {label}
+                          </div>
+                          <p className="text-sm text-slate-600 leading-snug">
+                            {description}
+                          </p>
+                        </Link>
+                      </NavigationMenuLink>
+                    ))}
                   </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
+              {/* Departments Dropdown */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white hover:bg-slate-700 focus:bg-slate-700 data-[active]:bg-slate-700 data-[state=open]:bg-slate-700">
+                <NavigationMenuTrigger className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700 hover:text-white focus:bg-slate-700 focus:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-slate-700/50 data-[state=open]:bg-slate-700/50">
                   DEPARTMENTS
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="grid w-[500px] grid-cols-2 gap-3 p-4 bg-white">
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/departments/cse"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Computer Science
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          CSE Department
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/departments/eee"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Electrical Engineering
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          EEE Department
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/departments/civil"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Civil Engineering
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          Civil Department
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/departments/business"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Business Administration
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          BBA Department
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
+                  <div className="grid w-[500px] grid-cols-2 gap-3 p-4 bg-white shadow-lg rounded-md">
+                    {departments.map(({ label, tagline }, idx) => (
+                      <NavigationMenuLink key={idx} asChild>
+                        <Link
+                          href="/department"
+                          className="group grid h-auto w-full items-start justify-start gap-1 rounded-md bg-white p-4 text-sm font-medium transition-colors hover:bg-slate-50 focus:bg-slate-50 focus:outline-none"
+                        >
+                          <div className="text-sm font-medium text-slate-900 group-hover:text-slate-800">
+                            {label}
+                          </div>
+                          <p className="text-sm text-slate-600 leading-snug">
+                            {tagline}
+                          </p>
+                        </Link>
+                      </NavigationMenuLink>
+                    ))}
                   </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
-              <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <Link
-                    href="/notices"
-                    className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700 focus:bg-slate-700 focus:outline-none"
-                  >
-                    NOTICES
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white hover:bg-slate-700 focus:bg-slate-700 data-[active]:bg-slate-700 data-[state=open]:bg-slate-700">
-                  PAYMENT
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <div className="grid w-[400px] gap-3 p-4 bg-white">
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/payment/tuition"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Tuition Fees
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          Pay semester fees online
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/payment/hostel"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Hostel Fees
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          Accommodation fee payment
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/payment/library"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Library Fees
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          Library and lab fees
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/payment/history"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Payment History
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          View payment records
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
-                  </div>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white hover:bg-slate-700 focus:bg-slate-700 data-[active]:bg-slate-700 data-[state=open]:bg-slate-700">
-                  RESULTS
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <div className="grid w-[400px] gap-3 p-4 bg-white">
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/results/semester"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Semester Results
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          View semester exam results
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/results/final"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Final Results
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          Final examination results
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="/results/transcript"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100"
-                      >
-                        <div className="text-sm font-medium leading-none text-slate-900">
-                          Transcript
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-slate-600">
-                          Download official transcript
-                        </p>
-                      </Link>
-                    </NavigationMenuLink>
-                  </div>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <Link
-                    href="/contact"
-                    className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700 focus:bg-slate-700 focus:outline-none"
-                  >
-                    CONTACT
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
+              {navigationItems.map(({ label, href }) => (
+                <NavigationMenuItem key={href}>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href={href}
+                      className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700 hover:text-white focus:bg-slate-700 focus:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                    >
+                      {label}
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              ))}
             </NavigationMenuList>
           </NavigationMenu>
 
-          {/* Login Button */}
+          {/* Desktop Login Button */}
           <Button
             variant="outline"
             size="sm"
-            className="hidden lg:flex border-slate-600 text-white hover:bg-slate-700 hover:text-white bg-transparent"
+            className="hidden lg:flex border-slate-600 text-white hover:bg-slate-700 bg-transparent transition-colors focus:bg-slate-700"
           >
             <User className="h-4 w-4 mr-2" />
             LOGIN
           </Button>
 
-          {/* Mobile Login */}
+          {/* Mobile Login Button */}
           <Button
             variant="outline"
             size="sm"
-            className="lg:hidden border-slate-600 text-white hover:bg-slate-700 hover:text-white bg-transparent"
+            className="lg:hidden border-slate-600 text-white hover:bg-slate-700 bg-transparent transition-colors focus:bg-slate-700"
+            aria-label="Login"
           >
             <User className="h-4 w-4" />
           </Button>
