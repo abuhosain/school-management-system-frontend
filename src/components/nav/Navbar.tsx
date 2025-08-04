@@ -89,7 +89,8 @@ export default function Navbar() {
                 <div className="flex items-center gap-2">
                   <GraduationCap className="h-6 w-6 text-blue-400" />
                   <span className="font-bold text-lg">
-                    Kutubpur High School
+                    সরকারি আজিজুল হক কলেজ,বগুড়া
+
                   </span>
                 </div>
               </div>
@@ -161,17 +162,7 @@ export default function Navbar() {
               </div>
             </SheetContent>
           </Sheet>
-
-          {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-          >
-            <GraduationCap className="h-8 w-8 text-blue-400" />
-            <span className="font-bold text-xl hidden sm:block">
-              Kutubpur High School
-            </span>
-          </Link>
+ 
 
           {/* Desktop Navigation */}
           <NavigationMenu className="hidden lg:flex">

@@ -1,3 +1,22 @@
+/* Notice Section Styling */
+.notice-section {
+  background: linear-gradient(to right, #1e3a8a, #1e293b);
+  border-top: 1px solid #475569;
+}
+
+/* Notice Badge Styling */
+.notice-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: rgba(37, 99, 235, 0.8);
+  color: white;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
 
 /* Professional Marquee Animation */
 .marquee-container {
@@ -13,9 +32,8 @@
 }
 
 .marquee-item {
-   
   font-size: 0.875rem;
-  
+  color: #f1f5f9;
   margin-right: 4rem;
   display: inline-block;
   flex-shrink: 0;
@@ -46,7 +64,34 @@
   z-index: 10;
   pointer-events: none;
 }
- 
+
+.marquee-container::before {
+  left: 0;
+  background: linear-gradient(to right, #1e293b, transparent);
+}
+
+.marquee-container::after {
+  right: 0;
+  background: linear-gradient(to left, #1e293b, transparent);
+}
+
+/* View All Button Styling */
+.view-all-btn {
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem 0.75rem;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 9999px;
+  border: 1px solid #3b82f6;
+  text-decoration: none;
+}
+
+.view-all-btn:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -57,5 +102,64 @@
   .marquee-item {
     font-size: 0.8125rem;
     margin-right: 3rem;
+  }
+
+  .notice-badge {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .view-all-btn {
+    padding: 0.375rem 0.625rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .marquee-container::before {
+    background: linear-gradient(to right, #1e293b, transparent);
+  }
+
+  .marquee-container::after {
+    background: linear-gradient(to left, #1e293b, transparent);
+  }
+}
+
+/* Enhanced animations */
+.notice-badge {
+  animation: pulse-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+  }
+}
+
+/* Smooth transitions */
+.view-all-btn,
+.notice-badge {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus states for accessibility */
+.view-all-btn:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .marquee-content {
+    animation: none;
+    transform: none;
+  }
+
+  .marquee-container::before,
+  .marquee-container::after {
+    display: none;
   }
 }
