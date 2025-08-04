@@ -1,5 +1,6 @@
 import Navbar from "@/components/nav/Navbar";
 import SubNav from "@/components/nav/SubNav";
+import ScrollToTop from "@/components/shared/scroll-to-top";
 import React, { ReactNode } from "react";
 
 const layout = ({ children }: { children: ReactNode }) => {
@@ -9,6 +10,7 @@ const layout = ({ children }: { children: ReactNode }) => {
         <SubNav />
         <Navbar />
         {children}
+        <ScrollToTop />
       </div>
     </div>
   );
