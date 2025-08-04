@@ -12,21 +12,21 @@ const Hero = () => {
   const slides = [
     {
       id: 1,
-      image: "https://i.ibb.co/yncSPsnR/Orange-Gradient-Web-Developer-Course-Facebook-Cover.png",
+      image: "https://res.cloudinary.com/djqyb52xi/image/upload/v1745091882/2i0t5m2oxbw-1745091882760-file-b1.jpg",
       title: "সরকারি আজিজুল হক কলেজ",
       subtitle: "শিক্ষার আলোয় আলোকিত ভবিষ্যৎ",
       description: "Excellence in Education Since 1965",
     },
     {
       id: 2,
-      image: "/placeholder.svg?height=600&width=1200",
+      image: "https://res.cloudinary.com/djqyb52xi/image/upload/v1745060382/dadykumdja7-1745060382691-file-events.jpg",
       title: "আধুনিক শিক্ষা ব্যবস্থা",
       subtitle: "গুণগত শিক্ষার নিশ্চয়তা",
       description: "Modern Education for Bright Future",
     },
     {
       id: 3,
-      image: "/placeholder.svg?height=600&width=1200",
+      image: "https://res.cloudinary.com/djqyb52xi/image/upload/v1744303774/lk1dpty9yd-1744303770843-file-b3.jpg",
       title: "সমৃদ্ধ গ্রন্থাগার",
       subtitle: "জ্ঞানের ভান্ডার",
       description: "Rich Library Resources",
