@@ -189,7 +189,7 @@ export default function Navbar() {
                       <NavigationMenuLink key={href} asChild>
                         <Link
                           href={href}
-                          className="group grid h-auto w-full items-start justify-start gap-1 rounded-md bg-white p-4 text-sm font-medium transition-colors hover:bg-slate-50 focus:bg-slate-50 focus:outline-none"
+                          className="group grid h-auto w-full items-start justify-start gap-1 rounded-md bg-white p-4 text-sm font-medium transition-colors hover:bg-slate-50 focus:bg-slate-50 focus:outline-none border"
                         >
                           <div className="text-sm font-medium text-slate-900 group-hover:text-slate-800">
                             {label}
@@ -215,7 +215,7 @@ export default function Navbar() {
                       <NavigationMenuLink key={idx} asChild>
                         <Link
                           href="/department"
-                          className="group grid h-auto w-full items-start justify-start gap-1 rounded-md bg-white p-4 text-sm font-medium transition-colors hover:bg-slate-50 focus:bg-slate-50 focus:outline-none"
+                          className="group grid h-auto w-full items-start justify-start gap-1 rounded-md bg-white p-4 text-sm font-medium transition-colors hover:bg-slate-50 focus:bg-slate-50 focus:outline-none border"
                         >
                           <div className="text-sm font-medium text-slate-900 group-hover:text-slate-800">
                             {label}
