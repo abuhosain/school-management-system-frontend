@@ -26,11 +26,11 @@ import {
 import { Separator } from "@/components/ui/separator";
 
 const navigationItems = [
+  { label: "NOTICES", href: "/notices" },
+   { label: "PAYMENT", href: "/payment" },
+  { label: "RESULTS", href: "/result" },
   { label: "ABOUT US", href: "/about" },
   { label: "CONTACT", href: "/contact" },
-  { label: "PAYMENT", href: "/payment" },
-  { label: "RESULTS", href: "/result" },
-  { label: "NOTICES", href: "/notices" },
 ];
 
 const academicItems = [
@@ -180,7 +180,7 @@ export default function Navbar() {
                 <NavigationMenuLink asChild>
                   <Link
                     href={"/"}
-                    className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700 hover:text-white focus:bg-slate-700 focus:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white hover:text-black focus:bg-white focus:text-balck focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                   >
                     {"HOME"}
                   </Link>
@@ -189,7 +189,7 @@ export default function Navbar() {
 
               {/* Academic Dropdown */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700 hover:text-white focus:bg-slate-700 focus:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-slate-700/50 data-[state=open]:bg-slate-700/50">
+                <NavigationMenuTrigger className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white hover:text-black focus:bg-white focus:text-black focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-white data-[state=open]:bg-white">
                   ACADEMIC
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -215,7 +215,7 @@ export default function Navbar() {
 
               {/* Departments Dropdown */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700 hover:text-white focus:bg-slate-700 focus:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-slate-700/50 data-[state=open]:bg-slate-700/50">
+                <NavigationMenuTrigger className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white hover:text-black focus:bg-white focus:text-black focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-white data-[state=open]:bg-white">
                   DEPARTMENTS
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -244,7 +244,7 @@ export default function Navbar() {
                   <NavigationMenuLink asChild>
                     <Link
                       href={href}
-                      className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700 hover:text-white focus:bg-slate-700 focus:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                      className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white hover:text-black focus:bg-white focus:text-balck focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                     >
                       {label}
                     </Link>
